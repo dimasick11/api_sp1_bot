@@ -25,7 +25,8 @@ def parse_homework_status(homework):
 def get_homework_statuses(current_timestamp):
     headers = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
     params = {'from_date': current_timestamp}
-    homework_statuses = requests.get('https://praktikum.yandex.ru/api/user_api/homework_statuses/', headers=headers, params=params)
+    homework_statuses = requests.get('https://praktikum.yandex.ru/api/user_api/homework_statuses/',
+                                     headers=headers, params=params)
     return homework_statuses.json()
 
 
@@ -45,7 +46,7 @@ def main():
             if new_homework.get('homeworks'):
                 send_message(parse_homework_status(new_homework.get('homeworks')[0]))
             current_timestamp = new_homework.get('current_date')  # обновить timestamp
-            time.sleep(300)  # опрашивать раз в пять минут
+            time.sleep(1200)  # опрашивать раз в пять минут
 
         except Exception as e:
             print(f'Бот упал с ошибкой: {e}')
